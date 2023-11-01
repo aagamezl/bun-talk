@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  postgres:
+    image: "postgres:16.0-alpine3.18"
+    container_name: bun-rest-api-database
+    restart: on-failure
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./temp/postgres/data:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_DB: bun-rest-api
+      POSTGRES_USER: bun-rest-api
+      POSTGRES_PASSWORD: ujt9ack5gbn_TGD4mje
+

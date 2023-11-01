@@ -1,0 +1,13 @@
+hyperfine 'node fibonacci.js' 'bun run fibonacci.js' 'deno run fibonacci.js'
+
+hyperfine 'node request.js' 'bun run request.js' 'deno run --allow-net request.js'
+
+hyperfine 'node json.node.js' 'bun run json.bun.js' 'deno run --allow-write --allow-read json.deno.js'
+
+hyperfine 'node montecarlo-pi.js' 'bun run montecarlo-pi.js' 'deno run montecarlo-pi.js'
+
+hyperfine 'node matrix-multiplication.js' 'bun run matrix-multiplication.js' 'deno run matrix-multiplication.js'
+
+oha -n 1000000 http://localhost:3000/
+
+oha -n 100000 -c 1000 --burst-delay 1s --burst-rate 1000 --latency-correction --disable-keepalive http://localhost:3000/
