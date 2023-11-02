@@ -14,4 +14,4 @@ const fibonacci = (n) => {
   return fibonacci(n - 1) + fibonacci(n - 2)
 }
 
-console.log(`fibonacci(40) is ${fibonacci(40)}`)
+console.log(`fibonacci(45) is ${fibonacci(45)}`)

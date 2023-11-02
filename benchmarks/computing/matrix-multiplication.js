@@ -12,17 +12,42 @@ const matrixMultiplication = (matrix1, matrix2) => {
   return result
 }
 
-const matrixSize = 1_000 // Adjust the matrix size as needed
-const matrixA = []
-const matrixB = []
-
-for (let i = 0; i < matrixSize; i++) {
-  matrixA.push(Array.from({ length: matrixSize }, () => Math.random()))
-  matrixB.push(Array.from({ length: matrixSize }, () => Math.random()))
+function createEmptyMatrix(rows, cols) {
+  let result = [];
+  for (let i = 0; i < rows; i++) {
+    let row = [];
+    for (let j = 0; j < cols; j++) {
+      row.push(0);
+    }
+    result.push(row);
+  }
+  return result;
 }
 
-console.time("Matrix Multiplication")
-matrixMultiplication(matrixA, matrixB)
-console.timeEnd("Matrix Multiplication")
+function generateRandomMatrix(matrixSize) {
+  const matrixA = new Array(matrixSize);
 
-// console.log("Result Matrix:", resultMatrix)
+  for (let i = 0; i < matrixSize; i++) {
+    matrixA[i] = new Array(matrixSize);
+
+    for (let j = 0; j < matrixSize; j++) {
+      matrixA[i][j] = Math.random();
+    }
+  }
+
+  return matrixA;
+}
+
+const matrixSize = 700 // Adjust the matrix size as needed
+const matrixA = generateRandomMatrix(matrixSize)
+const matrixB = generateRandomMatrix(matrixSize)
+
+// const matrixA = []
+// const matrixB = []
+
+// for (let i = 0; i < matrixSize; i++) {
+//   matrixA.push(Array.from({ length: matrixSize }, () => Math.random()))
+//   matrixB.push(Array.from({ length: matrixSize }, () => Math.random()))
+// }
+
+matrixMultiplication(matrixA, matrixB)

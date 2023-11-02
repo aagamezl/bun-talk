@@ -1,13 +1,17 @@
-hyperfine 'node fibonacci.js' 'bun run fibonacci.js' 'deno run fibonacci.js'
+clear && hyperfine 'bun run benchmarks/computing/fibonacci.js' 'deno run benchmarks/computing/fibonacci.js' './benchmarks/computing/fibonacci/fibonacci' 'node benchmarks/computing/fibonacci.js'
 
-hyperfine 'node request.js' 'bun run request.js' 'deno run --allow-net request.js'
+clear && hyperfine 'node request.js' 'bun run request.js' 'deno run --allow-net request.js'
 
-hyperfine 'node json.node.js' 'bun run json.bun.js' 'deno run --allow-write --allow-read json.deno.js'
+clear && hyperfine 'bun run benchmarks/filesystem/json.bun.js' 'deno run --allow-write --allow-read benchmarks/filesystem/json.deno.js' './benchmarks/filesystem/json-go/json-go' 'node benchmarks/filesystem/json.node.js'
 
-hyperfine 'node montecarlo-pi.js' 'bun run montecarlo-pi.js' 'deno run montecarlo-pi.js'
+clear && hyperfine 'bun run benchmarks/computing/montecarlo-pi.js' 'deno run benchmarks/computing/montecarlo-pi.js' './benchmarks/computing/montecarlo/montecarlo-pi' 'node benchmarks/computing/montecarlo-pi.js'
 
-hyperfine 'node matrix-multiplication.js' 'bun run matrix-multiplication.js' 'deno run matrix-multiplication.js'
+clear && hyperfine 'bun run benchmarks/computing/matrix-multiplication-threads.js' 'deno run benchmarks/computing/matrix-multiplication-threads.js' './benchmarks/computing/matrix-multiplication/matrix-multiplication' 'node benchmarks/computing/matrix-multiplication-threads.js'
 
-oha -n 1000000 http://localhost:3000/
+clear && oha -n 1000000 http://localhost:3000/
 
-oha -n 100000 -c 1000 --burst-delay 1s --burst-rate 1000 --latency-correction --disable-keepalive http://localhost:3000/
+clear && oha -n 100000 -c 1000 --burst-delay 1s --burst-rate 1000 --latency-correction --disable-keepalive http://localhost:3000/
+
+go build -ldflags "-s -w"
+
+deno run --allow-env --allow-net benchmarks/http/deno-server.js

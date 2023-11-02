@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"time"
 )
@@ -9,24 +10,24 @@ import (
 func monteCarloPi(numPoints int) float64 {
 	insideCircle := 0
 
-	rand.Seed(time.Now().UnixNano())
+	randSource := rand.NewSource(time.Now().UnixNano())
+	rand := rand.New(randSource)
 
 	for i := 0; i < numPoints; i++ {
 		x := rand.Float64()
 		y := rand.Float64()
-		distance := x*x + y*y
+		distance := math.Sqrt(x*x + y*y)
 
 		if distance <= 1 {
 			insideCircle++
 		}
 	}
 
-	piApproximation := float64(insideCircle) / float64(numPoints) * 4
-	return piApproximation
+	return float64(insideCircle) / float64(numPoints) * 4
 }
 
 func main() {
-	numPoints := 1000000000 // Adjust the number of points for accuracy vs. speed
+	numPoints := 100000000 // Adjust the number of points for accuracy vs. speed
 
 	calculatedPi := monteCarloPi(numPoints)
 

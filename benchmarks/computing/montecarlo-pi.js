@@ -11,11 +11,10 @@ const monteCarloPi = (numPoints) => {
     }
   }
 
-  const piApproximation = (insideCircle / numPoints) * 4
-  return piApproximation
+  return (insideCircle / numPoints) * 4
 }
 
-const numPoints = 1000000000 // Adjust the number of points for accuracy vs. speed
+const numPoints = 100000000 // Adjust the number of points for accuracy vs. speed
 
 console.time("Monte Carlo Pi Calculation")
 const calculatedPi = monteCarloPi(numPoints)
